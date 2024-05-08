@@ -1,0 +1,15 @@
+<form action="/update" method="POST">
+
+    {{#each products}}
+        <input class="text" type="text" name="id" value="{{id}}" readonly="true" placeholder="Id" required=""><br>
+
+        <input class="text" type="text" name="name" value="{{name}}" placeholder="Nome" required=""><br>
+
+        <input class="text" type="number" name="amount" value="{{amount}}" placeholder="Quantidade" required=""><br>
+
+        <input class="text" type="text" name="description" value="{{description}}" placeholder="Descrição" required=""><br><br>
+
+        <input type="submit" value="Alterar">
+    {{/each}}
+
+</form>
