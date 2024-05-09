@@ -27,7 +27,8 @@ app.get('/', function (req, res) {
 app.get('/all', async function (req, res) {
     try {
         const response = await axios.get('http://localhost:5000/pecas');
-        res.status(200).json(response.data);
+        const products = response.data;
+        res.status(200).render('all', { products: products });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -44,7 +45,7 @@ app.post('/add', async function (req, res) {
     try {
         const { brand, model, year, piece } = req.body;
         await axios.post('http://localhost:5000/pecas', { brand, model, year, piece });
-        res.status(201).json({ message: "Cadastro realizado com sucesso" });
+        res.status(201);
         // redirecionado para home
         res.redirect('/');
     } catch (error) {
@@ -56,7 +57,7 @@ app.post('/add', async function (req, res) {
 app.get('/delete/:id', async function (req, res) {
     try {
         await axios.delete(`http://localhost:5000/pecas/${req.params.id}`);
-        res.status(200).json({ message: "Exclusão realizada com sucesso" });
+        res.status(200);
         // redirecionado para home
         res.redirect('/');
     } catch (error) {
@@ -79,7 +80,7 @@ app.post('/update', async function (req, res) {
     try {
         const { brand, model, year, piece } = req.body;
         await axios.put(`http://localhost:5000/pecas/${req.params.id}`, { brand, model, year, piece });
-        res.status(200).json({ message: "Atualização realizada com sucesso" });
+        res.status(200);
         // redirecionado para home
         res.redirect('/');
     } catch (error) {
