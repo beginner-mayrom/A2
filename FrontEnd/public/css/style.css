@@ -194,7 +194,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     color: #fff;
   }
   
-  input[type="submit"] {
+  input[type="submit"], button {
     font-size: .9em;
     color: #fff;
     background: #76b852;
@@ -208,7 +208,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     letter-spacing: 4px;
   }
   
-  input[type="submit"]:hover {
+  input[type="submit"]:hover, button:hover {
     -webkit-transition: .5s all;
     -moz-transition: .5s all;
     -o-transition: .5s all;
