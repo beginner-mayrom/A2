@@ -1,13 +1,35 @@
 <form action="/add" method="post">
-
-<h1 style="color: #fff;">Cadastro do produto</h1><br>
-
-<input class="text" type="text" name="name" placeholder="Nome" required=""><br>
-
-<input class="text" type="number" name="amount" placeholder="Quantidade" required=""><br>
-
-<input class="text" type="text" name="description" placeholder="Descrição" required=""><br><br>
-
-<input type="submit" value="Cadastrar Produto">
-
+  <h1 style="color: #fff;">Cadastro do produto</h1><br>
+  <input class="text" type="text" name="brand" placeholder="Marca do Veículo" required=""><br>
+  <input class="text" type="text" name="model" placeholder="Modelo" required=""><br>
+  <input class="text" type="number" name="year" placeholder="Ano" required=""><br><br>
+  
+  <!-- Campos da primeira peça -->
+  <input class="text" type="text" name="pieces[0][name]" placeholder="Nome da Peça" required=""><br>
+  <input class="text" type="number" name="pieces[0][amount]" placeholder="Quantidade" required=""><br>
+  <input class="text" type="text" name="pieces[0][description]" placeholder="Descrição" required=""><br><br>
+  
+  <!-- Div para adicionar mais peças -->
+  <div id="pieces-container"></div>
+  
+  <!-- Botão para adicionar mais peças -->
+  <button type="button" onclick="addPiece()">Adicionar Outra Peça</button><br><br>
+  
+  <input type="submit" value="Cadastrar Produto">
 </form>
+
+<script>
+  let pieceCount = 1; // Contador de peças adicionadas
+
+  function addPiece() {
+    const container = document.getElementById('pieces-container');
+    const newPiece = document.createElement('div');
+    newPiece.innerHTML = `
+      <input class="text" type="text" name="pieces[${pieceCount}][name]" placeholder="Nome da Peça" required=""><br>
+      <input class="text" type="number" name="pieces[${pieceCount}][amount]" placeholder="Quantidade" required=""><br>
+      <input class="text" type="text" name="pieces[${pieceCount}][description]" placeholder="Descrição" required=""><br><br>
+    `;
+    container.appendChild(newPiece);
+    pieceCount++;
+  }
+</script>
