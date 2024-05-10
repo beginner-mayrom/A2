@@ -15,8 +15,8 @@ router.get("/", async (req, res) => {
 // Cadastrar um novo registros
 router.post("/", async (req, res) => {
   try {
-    const { brand, model, year, piece } = req.body;
-    const newAutoPeca = new AutoPeca({ brand, model, year, piece });
+    const { brand, model, year, pieces } = req.body;
+    const newAutoPeca = new AutoPeca({ brand, model, year, pieces });
     await newAutoPeca.save();
     res.status(201).json({ message: "Cadastrado com sucesso" });
   } catch (error) {
