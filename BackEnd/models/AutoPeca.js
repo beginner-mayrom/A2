@@ -6,7 +6,7 @@ const AutoPecaSchema = new mongoose.Schema(
     model: { type: String, required: true },
     year: { type: Number, required: true },
 
-    piece: [
+    pieces: [
       {
         name: { type: String, required: true },
         amount: { type: Number, required: true },
