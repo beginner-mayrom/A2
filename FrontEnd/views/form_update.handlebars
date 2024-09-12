@@ -1,15 +1,46 @@
 <form action="/update" method="POST">
 
-    {{#each products}}
-        <input class="text" type="text" name="id" value="{{id}}" readonly="true" placeholder="Id" required=""><br>
+  <input class="text" type="hidden" name="id" value="{{products._id}}" placeholder="Id" required=""/><br/>
 
-        <input class="text" type="text" name="name" value="{{name}}" placeholder="Nome" required=""><br>
+  <input class="text" type="text" name="brand" value="{{products.brand}}" readonly="true" placeholder="Marca" required=""/><br/>
 
-        <input class="text" type="number" name="amount" value="{{amount}}" placeholder="Quantidade" required=""><br>
+  <input class="text" type="text" name="model" value="{{products.model}}" readonly="true" placeholder="Modelo" required=""/><br/>
 
-        <input class="text" type="text" name="description" value="{{description}}" placeholder="Descrição" required=""><br><br>
+  <input class="text" type="number" name="year" value="{{products.year}}" readonly="true" placeholder="Ano" required=""/><br/><br/>
 
-        <input type="submit" value="Alterar">
+  <div id="pieces-container">
+    {{#each products.pieces}}
+      <div class="piece-entry">
+        <h2 style="color: #fff;">Peça</h2>
+        <input class="text" type="text" name="pieces[{{@index}}][name]" value="{{this.name}}" placeholder="Nome" required=""/><br/>
+        
+        <input class="text" type="number" name="pieces[{{@index}}][amount]" value="{{this.amount}}" placeholder="Quantidade" required=""/><br/>
+        
+        <input class="text" type="text" name="pieces[{{@index}}][description]" value="{{this.description}}" placeholder="Descrição" required=""/><br/><br/>
+      </div>
     {{/each}}
+  </div>
 
+  <!-- Botão para adicionar mais peças -->
+  <button type="button" onclick="addPiece()">Adicionar Outra Peça</button><br/><br/>
+
+  <input type="submit" value="Alterar" />
 </form>
+
+<script>
+  // Definir o contador de peças com base no número de peças existentes let
+  pieceCount = {{products.pieces.length}};
+  
+  function addPiece() {
+        const container = document.getElementById('pieces-container');
+        const newPiece = document.createElement('div');
+        newPiece.classList.add('piece-entry');
+        newPiece.innerHTML = `
+        <h2 style="color: #fff;">Peça</h2>
+        <input class="text" type="text" name="pieces[${pieceCount}][name]" placeholder="Nome da Peça" required=""><br>
+        <input class="text" type="number" name="pieces[${pieceCount}][amount]" placeholder="Quantidade" required=""><br>
+        <input class="text" type="text" name="pieces[${pieceCount}][description]" placeholder="Descrição" required=""><br><br>
+        `;
+        container.appendChild(newPiece);
+        pieceCount++; }
+</script>

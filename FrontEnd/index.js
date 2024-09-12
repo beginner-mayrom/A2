@@ -78,10 +78,11 @@ app.get("/delete/:id", async function (req, res) {
 //rota para alterar
 app.get("/alter/:id", async function (req, res) {
   try {
-    const products = await axios.get(
+    const response = await axios.get(
       `http://localhost:5000/pecas/${req.params.id}`
     );
-    res.render("form_update", { products: products.data });
+    const products = response.data;
+    res.status(200).render("form_update", { products: products });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -90,12 +91,12 @@ app.get("/alter/:id", async function (req, res) {
 //alterando os dados no bd
 app.post("/update", async function (req, res) {
   try {
-    const { brand, model, year, piece } = req.body;
-    await axios.put(`http://localhost:5000/pecas/${req.params.id}`, {
+    const { id, brand, model, year, pieces } = req.body;
+    await axios.put(`http://localhost:5000/pecas/${id}`, {
       brand,
       model,
       year,
-      piece,
+      pieces,
     });
     res.status(200);
     // redirecionado para home

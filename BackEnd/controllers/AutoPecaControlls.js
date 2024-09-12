@@ -47,12 +47,12 @@ router.delete("/:id", async (req, res) => {
 // Alterar um registro por ID
 router.put("/:id", async (req, res) => {
   try {
-    const { brand, model, year, piece } = req.body;
+    const { brand, model, year, pieces } = req.body;
     await AutoPeca.findByIdAndUpdate(req.params.id, {
       brand,
       model,
       year,
-      piece,
+      pieces,
     });
     res.status(200).json({ message: "Atualizado com sucesso" });
   } catch (error) {
